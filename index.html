@@ -32,6 +32,7 @@
             position: absolute;
             width: 30%;
             height: auto;
+            z-index: 1; /* Встановлення z-index для зображень */
         }
         #pinImage {
             top: 50%;
@@ -54,16 +55,25 @@
             font-size: 5vw;
             font-family: Arial, sans-serif;
             padding: 5px 10px;
+            z-index: 1; /* Встановлення z-index для змінної */
         }
         .maintenance {
-            background-color: rgba(128, 128, 128, 0.9); /* Сірий колір з прозорістю */
+            background-color: #808080; /* Непрозорий сірий колір */
             color: white;
             padding: 20px;
             border-radius: 10px;
-            font-size: 4vw;
+            font-size: 3.5vw; /* Розмір шрифту */
             text-align: center;
-            max-width: 80%;
-            z-index: 2; /* Зробити табличку над зображеннями */
+            position: absolute; /* Розміщення поверх інших елементів */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box; /* Включає відступи та межі у висоту і ширину */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2; /* Встановлення z-index для таблички поверх зображень і змінної */
         }
     </style>
 </head>
