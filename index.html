@@ -70,17 +70,14 @@
             width: 100%;
             height: 100%;
             box-sizing: border-box; /* Включає відступи та межі у висоту і ширину */
-            display:none;
-            justify-content: center;
-            align-items: center;
-            z-index: 2; /* Встановлення z-index для таблички поверх зображень і змінної */
+            display: none; /* Приховати табличку */
         }
     </style>
 </head>
 <body>
     <div class="rectangle">
         <div class="score" id="score">Score: 0</div>
-        <div class="maintenance">Технічна перерва<br>Приблизний час закінчення: 1 година</div>
+        <div class="maintenance" id="maintenance">Технічна перерва<br>Приблизний час закінчення: 1 година</div>
         <img src="images/mecha_mortis_special_pin.png" alt="Mecha Mortis Special Pin" id="pinImage">
         <img src="images/pin_pack_icon.png" alt="Pin Pack Icon" id="pinPackIcon">
     </div>
@@ -110,11 +107,6 @@
 
         // Додаємо обробник подій для натискання на зображення
         pinImage.addEventListener('click', function() {
-            updateScore(1);
-        });
-
-        // Додаємо обробник подій для торкань на зображення (для мобільних пристроїв)
-        pinImage.addEventListener('touchstart', function() {
             updateScore(1);
         });
 
