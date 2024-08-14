@@ -26,6 +26,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column; /* Додавання напрямку колонки */
         }
         .rectangle img {
             position: absolute;
@@ -54,11 +55,22 @@
             font-family: Arial, sans-serif;
             padding: 5px 10px;
         }
+        .maintenance {
+            background-color: rgba(128, 128, 128, 0.9); /* Сірий колір з прозорістю */
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 4vw;
+            text-align: center;
+            max-width: 80%;
+            z-index: 2; /* Зробити табличку над зображеннями */
+        }
     </style>
 </head>
 <body>
     <div class="rectangle">
         <div class="score" id="score">Score: 0</div>
+        <div class="maintenance">Технічна перерва<br>Приблизний час закінчення: 1 година</div>
         <img src="images/mecha_mortis_special_pin.png" alt="Mecha Mortis Special Pin" id="pinImage">
         <img src="images/pin_pack_icon.png" alt="Pin Pack Icon" id="pinPackIcon">
     </div>
