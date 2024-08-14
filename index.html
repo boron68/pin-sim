@@ -64,16 +64,13 @@
     </div>
 
     <script>
-        const gameVersion = "1.2"; // Оновлена версія гри
-        const apkVersion = "1.0"; // Версія APK
+        const gameVersion = "1.0"; // Поточна версія гри
 
         // Функція для перевірки версії гри
         function checkGameVersion() {
-            const requiredVersion = "1.2"; // Необхідна версія гри
-            if (apkVersion === "1.0" && gameVersion !== requiredVersion) {
-                alert("Оновіть гру до останньої версії!");
-                // Можна додати перехід на сторінку оновлення або іншу дію
-                // window.location.href = 'update.html'; // Наприклад, перенаправлення на сторінку оновлення
+            const requiredVersion = "1.0"; // Необхідна версія гри
+            if (gameVersion !== requiredVersion) {
+                alert("Нова версія доступна. Оновіть гру!");
             }
         }
 
