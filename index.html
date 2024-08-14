@@ -71,6 +71,7 @@
             height: 100%;
             box-sizing: border-box; /* Включає відступи та межі у висоту і ширину */
             display:flex; /* Приховати табличку */
+            z-index: 2; /* Зробити табличку найвищою за z-index */
         }
     </style>
 </head>
@@ -112,6 +113,16 @@
 
         // Перевірка версії гри при завантаженні сторінки
         checkGameVersion();
+
+        // Функція для відображення таблички з технічною перервою
+        function showMaintenance() {
+            document.getElementById('maintenance').style.display = 'flex';
+        }
+
+        // Функція для приховування таблички з технічною перервою
+        function hideMaintenance() {
+            document.getElementById('maintenance').style.display = 'none';
+        }
     </script>
 </body>
 </html>
