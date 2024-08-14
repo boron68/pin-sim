@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <title>Великий Зелений Прямокутник з Зображенням і Очками</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #e0f0e0;
+            overflow: hidden;
+            flex-direction: column;
+        }
+        .rectangle {
+            width: 90vw;
+            max-width: 600px; /* Обмеження максимальної ширини */
+            height: 90vh;
+            max-height: 1000px; /* Обмеження максимальної висоти */
+            background-color: #009900;
+            border: 10px solid black;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .rectangle img {
+            position: absolute;
+            width: 30%;
+            height: auto;
+        }
+        #pinImage {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+        }
+        #pinPackIcon {
+            bottom: 10px;
+            left: 10px;
+            width: 15vw;
+            height: auto;
+        }
+        .score {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 5vw;
+            font-family: Arial, sans-serif;
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="rectangle">
+        <div class="score" id="score">Score: 0</div>
+        <img src="images/mecha_mortis_special_pin.png" alt="Mecha Mortis Special Pin" id="pinImage">
+        <img src="images/pin_pack_icon.png" alt="Pin Pack Icon" id="pinPackIcon">
+    </div>
+
+    <script>
+        const gameVersion = "1.2"; // Оновлена версія гри
+        const apkVersion = "1.0"; // Версія APK
+
+        // Функція для перевірки версії гри
+        function checkGameVersion() {
+            const requiredVersion = "1.2"; // Необхідна версія гри
+            if (apkVersion === "1.0" && gameVersion !== requiredVersion) {
+                alert("Оновіть гру до останньої версії!");
+                // Можна додати перехід на сторінку оновлення або іншу дію
+                // window.location.href = 'update.html'; // Наприклад, перенаправлення на сторінку оновлення
+            }
+        }
+
+        // Ініціалізація змінної для очок
+        let score = 0;
+
+        // Функція для оновлення значення очок
+        function updateScore(amount) {
+            score += amount;
+            document.getElementById('score').textContent = 'Score: ' + score;
+        }
+
+        // Отримуємо зображення
+        const pinImage = document.getElementById('pinImage');
+
+        // Додаємо обробник подій для натискання на зображення
+        pinImage.addEventListener('click', function() {
+            updateScore(10);
+        });
+
+        // Додаємо обробник подій для торкань на зображення (для мобільних пристроїв)
+        pinImage.addEventListener('touchstart', function() {
+            updateScore(10);
+        });
+
+        // Перевірка версії гри при завантаженні сторінки
+        checkGameVersion();
+    </script>
+</body>
+</html>
