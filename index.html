@@ -15,20 +15,26 @@
             overflow: hidden;
             flex-direction: column;
         }
-        .rectangle {
+        .rectangle, .shop-scene {
             width: 90vw;
             max-width: 600px; /* Обмеження максимальної ширини */
             height: 90vh;
             max-height: 1000px; /* Обмеження максимальної висоти */
-            background-color: #009900;
-            border: 10px solid black;
             position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column; /* Додавання напрямку колонки */
+            border: 10px solid black; /* Додаємо межі екрану */
         }
-        .rectangle img {
+        .rectangle {
+            background-color: #009900;
+        }
+        .shop-scene {
+            background-color: #87CEEB; /* Блакитний фон для магазину */
+            display: none; /* Приховати сцену магазину спочатку */
+        }
+        .rectangle img, .shop-scene img {
             position: absolute;
             width: 30%;
             height: auto;
@@ -69,18 +75,72 @@
             left: 0;
             width: 100%;
             height: 100%;
-            box-sizing: border-box; /* Включає відступи та межі у висоту і ширину */
-            display:flex; /* Приховати табличку */
+            box-sizing: border-box; /* Включення padding у розміри елемента */
+            display: none; /* Приховати табличку */
             z-index: 2; /* Зробити табличку найвищою за z-index */
+        }
+        .shop-button {
+            position: absolute;
+            bottom: 80px; /* Розміщення кнопки вище на сторінці */
+            left: 10px;
+            z-index: 2;
+            padding: 2px 8px; /* Зменшені відступи для вужчої ширини */
+            background-color: #FF4500;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 2vw; /* Розмір тексту */
+        }
+        .back-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 5px 10px;
+            background-color: #FF4500;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 2vw; /* Розмір тексту */
+            z-index: 2;
+        }
+        .banner {
+            position: absolute;
+            top: 20px; /* Розміщення банера трохи нижче верху */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 250px; /* Збільшена ширина банера */
+            height: 250px; /* Висота банера, що дорівнює ширині, для квадратної форми */
+            background-color: #FFA500; /* Оранжевий фон банера */
+            border-radius: 10px; /* Круглі краї банера */
+            box-sizing: border-box; /* Включення padding у розміри елемента */
+            z-index: 1; /* Задній план для банера */
+        }
+        #bannerImage {
+            position: absolute;
+            top: 20%; /* Піднято зображення трохи вище */
+            left: 50%;
+            transform: translate(-50%, -30%);
+            width: 25%; /* Ще більше зменшена ширина зображення */
+            height: auto;
+            z-index: 2; /* Зображення поверх банера */
         }
     </style>
 </head>
 <body>
-    <div class="rectangle">
-        <div class="score" id="score">Score: 0</div>
+    <div class="rectangle" id="mainScene">
+        <div class="score" id="score">Coins: 0</div>
+        <button class="shop-button" onclick="showShop()">Магазин</button>
         <div class="maintenance" id="maintenance">Технічна перерва<br>Приблизний час закінчення: 1 година</div>
         <img src="images/mecha_mortis_special_pin.png" alt="Mecha Mortis Special Pin" id="pinImage">
         <img src="images/pin_pack_icon.png" alt="Pin Pack Icon" id="pinPackIcon">
+    </div>
+
+    <div class="shop-scene" id="shopScene">
+        <button class="back-button" onclick="backToMain()">Назад</button>
+        <div class="banner"></div> <!-- Банер без тексту -->
+        <img src="images/gold_1.png" alt="Gold" id="bannerImage"> <!-- Зображення на банері -->
     </div>
 
     <script>
@@ -94,35 +154,43 @@
             }
         }
 
-        // Ініціалізація змінної для очок
-        let score = 0;
+        // Ініціалізація змінної для монет
+        let coins = 0;
 
-        // Функція для оновлення значення очок
-        function updateScore(amount) {
-            score += amount;
-            document.getElementById('score').textContent = 'Score: ' + score;
+        // Функція для оновлення значення монет
+        function updateCoins(amount) {
+            coins += amount;
+            document.getElementById('score').textContent = 'Coins: ' + coins;
         }
 
         // Отримуємо зображення
         const pinImage = document.getElementById('pinImage');
+        const bannerImage = document.getElementById('bannerImage');
 
         // Додаємо обробник подій для натискання на зображення
         pinImage.addEventListener('click', function() {
-            updateScore(1);
+            updateCoins(1);
         });
+
+        // Додаємо обробник подій для натискання на зображення монети
+        bannerImage.addEventListener('click', function() {
+            updateCoins(10);
+        });
+
+        // Функція для відкриття магазину
+        function showShop() {
+            document.getElementById('mainScene').style.display = 'none';
+            document.getElementById('shopScene').style.display = 'flex';
+        }
+
+        // Функція для повернення до головної сцени
+        function backToMain() {
+            document.getElementById('shopScene').style.display = 'none';
+            document.getElementById('mainScene').style.display = 'flex';
+        }
 
         // Перевірка версії гри при завантаженні сторінки
         checkGameVersion();
-
-        // Функція для відображення таблички з технічною перервою
-        function showMaintenance() {
-            document.getElementById('maintenance').style.display = 'flex';
-        }
-
-        // Функція для приховування таблички з технічною перервою
-        function hideMaintenance() {
-            document.getElementById('maintenance').style.display = 'none';
-        }
     </script>
 </body>
 </html>
