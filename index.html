@@ -80,7 +80,7 @@
             width: 100%;
             height: 100%;
             box-sizing: border-box;
-            display: display flex;
+            display: none;
             z-index: 2;
         }
         .shop-button {
@@ -173,9 +173,29 @@
 
         let coins = 0;
 
+        // Отримати кількість монет з localStorage, якщо вона існує
+        function loadCoins() {
+            const savedCoins = localStorage.getItem('coins');
+            if (savedCoins !== null) {
+                coins = parseInt(savedCoins, 10);
+                updateCoinsDisplay();
+            }
+        }
+
+        // Оновлення кількості монет на екрані
+        function updateCoinsDisplay() {
+            document.getElementById('score').textContent = 'Coins: ' + coins;
+        }
+
+        // Зберегти кількість монет у localStorage
+        function saveCoins() {
+            localStorage.setItem('coins', coins);
+        }
+
         function updateCoins(amount) {
             coins += amount;
-            document.getElementById('score').textContent = 'Coins: ' + coins;
+            updateCoinsDisplay();
+            saveCoins(); // Зберігаємо зміни після кожної операції
         }
 
         const pinImage = document.getElementById('pinImage');
@@ -215,6 +235,7 @@
         });
 
         checkGameVersion();
+        loadCoins(); // Завантажуємо кількість монет при завантаженні сторінки
     </script>
 </body>
 </html>
